@@ -4,19 +4,18 @@ import os
 import requests
 import re
 import time
-import sys  # 引数取得用に追加
+import sys
 
 def download_deepwiki_project(base_url):
-    # 末尾のスラッシュを削除して一貫性を持たせる
     base_url = base_url.rstrip('/')
     
-    # プロジェクト名の抽出 (URLの最後の要素)
+    # プロジェクト名の抽出
     project_name = base_url.split('/')[-1]
     if not os.path.exists(project_name):
         os.makedirs(project_name)
         print(f"フォルダ '{project_name}' を作成しました。")
 
-    # Jina Reader経由でメインページを取得して目次を解析
+    # メインページを取得して目次を解析
     jina_url = f"https://r.jina.ai/{base_url}"
     headers = {"User-Agent": "Mozilla/5.0"}
     
